@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Employee } from '../models/employee.model';
 
 @Component({
-  selector: 'app-list-employees',
+  // selector: 'app-list-employees',
   templateUrl: './list-employees.component.html',
   styleUrls: ['./list-employees.component.css']
 })
