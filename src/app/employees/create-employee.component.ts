@@ -7,6 +7,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent {
+
   saveEmployee(empForm: NgForm): void{
     console.log(empForm.value);
   }
