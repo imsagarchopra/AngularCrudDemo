@@ -60,11 +60,15 @@
                     </option>                      
                 </select>                      
             </div>
-            <div class="form-group">
-                <label for="dateOfBirth">Date of Birth</label>
-                <input id="dateOfBirth" name="dateOfBirth" ngModel="dateOfBirth" type="date" class="form-control"/>
-                <!-- <input id="dateOfBirth" name="dateOfBirth" ngModel="dateOfBirth" type="text" bsDatepicker class="form-control"/> -->
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <!-- <input id="dateOfBirth" name="dateOfBirth" ngModel="dateOfBirth" type="date" class="form-control"/> -->
+                    <input id="dateOfBirth" name="dateOfBirth" ngModel="" type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control" placement="right"/>
+                </div>
+
             </div>
+          
         </div>
         <div class="panel-footer">
             <button type="submit" class="btn btn-primary">Save</button>
