@@ -17,7 +17,8 @@ export class CreateEmployeeComponent {
     {id: 3, name: 'IT'},
     {id: 4, name: 'Payroll'},
   ];
-
+  photoPath!: string;
+  previewPhoto: boolean = false;
   constructor(){
     this.datePickerConfig = Object.assign({},
        {
@@ -30,5 +31,9 @@ export class CreateEmployeeComponent {
   }
   saveEmployee(empForm: NgForm): void{
     console.log(empForm.value);
+  }
+
+  togglePhotoPreview(): void{
+    this.previewPhoto = !this.previewPhoto;
   }
 }
