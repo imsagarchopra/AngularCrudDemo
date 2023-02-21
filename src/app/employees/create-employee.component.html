@@ -4,10 +4,21 @@
         <h3 class="panel-title">Create Employee</h3>
         </div>
         <div class="panel-body">
-            <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input id="fullName" name="fullName" ngModel="" type="text" class="form-control"/>
+            <div class="form-group" [class.has-error]="fullNameControl.invalid  && fullNameControl.touched"
+            [class.has-success]="fullNameControl.valid">
+                <label for="fullName" class="control-label">Full Name</label>
+                <input required id="fullName" name="fullName" ngModel="" type="text" class="form-control" #fullNameControl = "ngModel"/>
+                <span class="help-block" *ngIf="fullNameControl.invalid && fullNameControl.touched">
+                    Full Name is required
+                </span>
             </div>
+
+            <div>touched: {{fullNameControl.touched}}</div>
+            <div>untouched: {{fullNameControl.untouched}}</div>
+            <div>pristine: {{fullNameControl.pristine}}</div>
+            <div>dirty: {{fullNameControl.dirty}}</div>
+            <div>valid: {{fullNameControl.valid}}</div>
+            <div>invalid: {{fullNameControl.invalid}}</div>
 
             <div class="form-group">
                 <label for="email">Email</label>
@@ -91,7 +102,7 @@
             </div>
         </div>
         <div class="panel-footer">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Save</button>
         </div>
     </div>
 </form>
