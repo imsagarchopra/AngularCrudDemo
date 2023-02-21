@@ -21,9 +21,13 @@
             <div>valid: {{nameControl.valid}}</div>
             <div>invalid: {{nameControl.invalid}}</div> -->
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" name="email" [(ngModel)]="employee.email" type="text" class="form-control"/>
+            <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
+                <label for="email" class="control-label">Email</label>
+                <input id="email" required email name="email" [(ngModel)]="employee.email" type="text" class="form-control" #email="ngModel"/>
+
+                <span class="help-block" *ngIf="email.errors && email.touched">
+                    Email is required
+                  </span>                 
             </div>
 
             <div class="form-group">
