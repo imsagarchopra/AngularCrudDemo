@@ -14,8 +14,4 @@ export class SelectRequiredValidatorDirective implements Validator
     validate(control: AbstractControl<any, any>): ValidationErrors | null {
         return control.value === '-1' ? {'defaultSelected': true} : null;
     }
-    registerOnValidatorChange?(fn: () => void): void {
-        throw new Error("Method not implemented.");
-    }
-
 }

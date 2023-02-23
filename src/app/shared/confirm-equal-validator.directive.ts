@@ -20,8 +20,4 @@ export class confirmEqualValidatorDirective implements Validator{
         }
         return null;
     }
-    registerOnValidatorChange?(fn: () => void): void {
-        throw new Error("Method not implemented.");
-    }
-
 }
