@@ -9,24 +9,24 @@ import { Employee } from '../models/employee.model';
 export class DisplayEmployeeComponent implements OnInit, OnChanges {
   private _employee!: Employee;
   @Input()
-  set employee(val: Employee){
+  set employee(val: Employee) {
     console.log('Previous : ' + (this._employee ? this._employee.name : 'NULL'));
     console.log('Current : ' + val.name);
     this._employee = val;
   }
-  get employee(): Employee{
+  get employee(): Employee {
     return this._employee;
   }
-  constructor(){
+  constructor() {
 
   }
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    
+
   }
 
   // ngOnChanges(changes: SimpleChanges): void {
