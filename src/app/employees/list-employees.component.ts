@@ -29,4 +29,9 @@ export class ListEmployeesComponent implements OnInit{
       this.arrayIndex = 1;
     }
   }
+
+  dataFromChild!: Employee;
+  handleNotify(eventData: Employee):void{
+    this.dataFromChild = eventData;
+  }
 }
