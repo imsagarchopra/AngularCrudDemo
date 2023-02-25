@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Department } from '../models/department.model';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
@@ -12,7 +12,9 @@ import { Router} from '@angular/router';
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent {
-
+  @ViewChild('employeeForm')
+  public createEmployeeForm !: NgForm;
+  
   datePickerConfig!: Partial<BsDatepickerConfig>;
 
   employee: Employee = new Employee();
