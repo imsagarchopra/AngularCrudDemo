@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from './employee.service';
 
@@ -11,7 +12,9 @@ export class ListEmployeesComponent implements OnInit{
   employees!: Employee[];
   employeeToDisplay!: Employee;
   private arrayIndex = 1;
-  constructor(private _employeeService: EmployeeService) { }
+
+  constructor(private _employeeService: EmployeeService,
+    private _router: Router) { }
 
   ngOnInit() {
     this.employees = this._employeeService.getEmployees();
@@ -33,5 +36,9 @@ export class ListEmployeesComponent implements OnInit{
   dataFromChild!: Employee;
   handleNotify(eventData: Employee):void{
     this.dataFromChild = eventData;
+  }
+
+  onClick(employeeId: number): void{
+    this._router.navigate(['/employees', employeeId])
   }
 }
