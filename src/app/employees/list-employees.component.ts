@@ -12,6 +12,7 @@ export class ListEmployeesComponent implements OnInit{
   employees!: Employee[];
   employeeToDisplay!: Employee;
   private arrayIndex = 1;
+  searchTerm!:string;
 
   constructor(private _employeeService: EmployeeService,
     private _router: Router) { }
