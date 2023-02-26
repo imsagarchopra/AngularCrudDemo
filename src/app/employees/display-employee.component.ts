@@ -1,4 +1,5 @@
 import { Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Employee } from '../models/employee.model';
 
 @Component({
@@ -8,6 +9,7 @@ import { Employee } from '../models/employee.model';
 })
 export class DisplayEmployeeComponent implements OnInit, OnChanges {
   private _employee!: Employee;
+  selectedEmployeeId!: Number;
   @Input()
   set employee(val: Employee) {
     console.log('Previous : ' + (this._employee ? this._employee.name : 'NULL'));
@@ -19,12 +21,12 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
   }
 
   @Output() notify: EventEmitter<Employee> = new EventEmitter<Employee>();
-  constructor() {
+  constructor(private _route: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-
+    this.selectedEmployeeId = Number(this._route.snapshot.paramMap.get('id'));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
