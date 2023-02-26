@@ -47,7 +47,9 @@ export class CreateEmployeeComponent {
   // }
 
   saveEmployee(): void{
-    this._employeeService.save(this.employee);
+    const newEmployee = Object.assign({},this.employee);
+    this._employeeService.save(newEmployee);
+    this.createEmployeeForm.reset();
     this._router.navigate(['list']);
   }
 
