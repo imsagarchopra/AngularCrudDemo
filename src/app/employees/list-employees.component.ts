@@ -10,9 +10,17 @@ import { EmployeeService } from './employee.service';
 })
 export class ListEmployeesComponent implements OnInit{
   employees!: Employee[];
+  filteredEmployees!:Employee[];
   employeeToDisplay!: Employee;
   private arrayIndex = 1;
-  searchTerm!:string;
+  private _searchTerm!:string;
+  get searchTerm(): string{
+    return this._searchTerm;
+  }
+  set searchTerm(value: string){
+    this._searchTerm = value;
+    this.filteredEmployees = this.filterEmployees(value);
+  }
 
   constructor(private _employeeService: EmployeeService,
     private _router: Router) { }
@@ -20,6 +28,7 @@ export class ListEmployeesComponent implements OnInit{
   ngOnInit() {
     this.employees = this._employeeService.getEmployees();
     this.employeeToDisplay = this.employees[0];
+    this.filteredEmployees = this.employees;
   }
 
   nextEmployee():void{
@@ -41,5 +50,10 @@ export class ListEmployeesComponent implements OnInit{
 
   onClick(employeeId: number): void{
     this._router.navigate(['/employees', employeeId])
+  }
+
+  filterEmployees(searchString: string):Employee[]{
+    return this.employees.filter(employee =>
+      employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 }
