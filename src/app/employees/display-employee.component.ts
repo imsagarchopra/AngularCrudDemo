@@ -1,6 +1,7 @@
 import { Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../models/employee.model';
+import { EmployeeService } from './employee.service';
 
 @Component({
   selector: 'app-display-employee',
@@ -22,8 +23,12 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
 
   @Input() searchTerm!: string;
   @Output() notify: EventEmitter<Employee> = new EventEmitter<Employee>();
+  @Output() notifyDelete: EventEmitter<number> = new EventEmitter<number>();
+  confirmDelete: boolean = false;
+  
   constructor(private _route: ActivatedRoute,
-    private _router: Router) {
+    private _router: Router,
+    private _employeeService: EmployeeService) {
 
   }
 
@@ -56,5 +61,11 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
   editEmployee(){
     this._router.navigate(['/edit', this.employee.id]
     );
+  }
+
+  deleteEmployee(){
+    
+    this._employeeService.deleteEmployee(this.employee.id);
+    this.notifyDelete.emit(this.employee.id);
   }
 }

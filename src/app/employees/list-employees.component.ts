@@ -77,4 +77,12 @@ export class ListEmployeesComponent implements OnInit{
     return this.employees.filter(employee =>
       employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
+
+  onDeleteNotification(id: number): void{
+    const foundIndex = this.filteredEmployees.findIndex(e => e.id === id);
+    if(foundIndex != -1)
+    {
+        this.filteredEmployees.splice(foundIndex, 1);
+    }
+  }
 }
