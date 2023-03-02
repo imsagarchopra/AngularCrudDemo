@@ -25,7 +25,8 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
   @Output() notify: EventEmitter<Employee> = new EventEmitter<Employee>();
   @Output() notifyDelete: EventEmitter<number> = new EventEmitter<number>();
   confirmDelete: boolean = false;
-  
+  isHidden : boolean= true;
+
   constructor(private _route: ActivatedRoute,
     private _router: Router,
     private _employeeService: EmployeeService) {
