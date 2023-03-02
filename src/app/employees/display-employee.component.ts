@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../models/employee.model';
 
 @Component({
@@ -20,8 +20,10 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
     return this._employee;
   }
 
+  @Input() searchTerm!: string;
   @Output() notify: EventEmitter<Employee> = new EventEmitter<Employee>();
-  constructor(private _route: ActivatedRoute) {
+  constructor(private _route: ActivatedRoute,
+    private _router: Router) {
 
   }
 
@@ -43,5 +45,11 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
 
   handleClick():void{
     this.notify.emit(this.employee);
+  }
+
+  viewEmployee(){
+    this._router.navigate(['/employees', this.employee.id],{
+      queryParams:{'searchTerm':this.searchTerm}
+    });
   }
 }
