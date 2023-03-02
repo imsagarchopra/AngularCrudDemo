@@ -1,23 +1,24 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Department } from '../models/department.model';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {Employee} from '../models/employee.model';
 import {EmployeeService} from './employee.service'
-import { Router} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
   styleUrls: ['./create-employee.component.css']
 })
-export class CreateEmployeeComponent {
+export class CreateEmployeeComponent implements OnInit{
   @ViewChild('employeeForm')
   public createEmployeeForm !: NgForm;
   
   datePickerConfig!: Partial<BsDatepickerConfig>;
 
   employee: Employee = new Employee();
+  panelTitle!: string;
 
   departments: Department[] =[
     {id: 1, name: 'Help Desk'},
@@ -28,7 +29,8 @@ export class CreateEmployeeComponent {
   photoPath!: string;
   previewPhoto: boolean = false;
   constructor(private _employeeService: EmployeeService,
-    private _router: Router){
+    private _router: Router,
+    private _route: ActivatedRoute){
     this.datePickerConfig = Object.assign({},
        {
         containerClass: 'theme-dark-blue', 
@@ -37,6 +39,25 @@ export class CreateEmployeeComponent {
         maxDate: new Date(2023,11,31),
         dateInputFormat: 'DD/MM/YYYY'
        });
+  }
+
+  ngOnInit(): void {
+    this._route.paramMap.subscribe(parameterMap =>{
+      const id = Number(parameterMap.get('id'));
+      this.getEmployee(id);
+    });
+  }
+
+  getEmployee(id: number): void{
+    if(id == 0){
+      this.employee = new Employee();
+      this.panelTitle = 'Create Employee';
+      this.createEmployeeForm.reset();
+    }
+    else{
+      this.panelTitle = 'Edit Employee';
+      this.employee = Object.assign({},this._employeeService.getEmployee(id));
+    }
   }
   // saveEmployee(empForm: NgForm): void{
   //   console.log(empForm.value);

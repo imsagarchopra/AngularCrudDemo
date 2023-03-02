@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { max, Observable } from "rxjs";
 import { of } from 'rxjs';
 import { Employee } from "../models/employee.model";
 
@@ -50,6 +50,17 @@ export class EmployeeService{
       }
 
       save(employee: Employee): void{
-        this.listEmployees.push(employee);
+        if(employee.id === null){
+          const maxId = this.listEmployees.reduce(function(e1,e2){
+            return (e1.id > e2.id) ? e1 : e2;
+          }).id;
+
+          employee.id = maxId + 1;
+          this.listEmployees.push(employee);
+        }
+        else{
+          const foundIndex = this.listEmployees.findIndex(e => e.id === employee.id);
+          this.listEmployees[foundIndex] = employee;
+        }
       }
 }
