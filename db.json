@@ -32,6 +32,20 @@
       "department": "3",
       "isActive": false,
       "photoPath": "assets/images/john.png"
+    },
+    {
+      "name": "David",
+      "email": "d",
+      "phoneNumber": "1",
+      "contactPreference": "Email",
+      "gender": "Male",
+      "isActive": true,
+      "department": "2",
+      "dateOfBirth": "2023-03-22T15:12:04.000Z",
+      "photoPath": "assets/images/mark.png",
+      "password": "1",
+      "confirmPassword": "1",
+      "id": 4
     }
   ]
 }
